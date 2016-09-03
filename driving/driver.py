@@ -7,9 +7,9 @@ from vehicle import Vehicle
 from motor import Motor
 
 GPIO.setmode(GPIO.BCM)
-motor1 = Motor(5, 6, 13)    # Forward Left
+motor1 = Motor(13, 26, 16)  # Forward Left
 motor2 = Motor(17, 27, 22)  # Forward Right
-motor3 = Motor(26, 16, 12)  # Rear Left
+motor3 = Motor(5, 6, 12)    # Rear Left
 motor4 = Motor(25, 24, 23)  # Rear Right
 steve = Vehicle(motor1, motor2, motor3, motor4)
 
