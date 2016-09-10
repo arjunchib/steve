@@ -15,8 +15,7 @@ motor4 = Motor(25, 24, 23)  # Rear Right
 steve = Vehicle(motor1, motor2, motor3, motor4)
 
 s = socket.socket()
-host = socket.gethostname()
-print(host)
+host = "127.0.0.1"
 port = 42069
 s.bind((host, port))
 
