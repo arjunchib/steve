@@ -21,20 +21,29 @@ s.bind((host, port))
 
 # message: "10 20"
 s.listen(1)
-while True:
-    c, addr = s.accept()
-    print addr
+try:
     while True:
-        message = s.recv(128)
-        print(message)
-        if message == "STOP":
-            break
-        leftVelocity, rightVelocity = parse(message)
-        motor1.rotate(leftVelocity)
-        motor3.rotate(leftVelocity)
-        motor2.rotate(rightVelocity)
-        motor4.rotate(rightVelocity)
-    c.close()
+        c, addr = s.accept()
+        print addr
+        while True:
+            message = s.recv(128)
+            print(message)
+            if message == "STOP":
+                break
+            leftVelocity, rightVelocity = parse(message)
+            motor1.rotate(leftVelocity)
+            motor3.rotate(leftVelocity)
+            motor2.rotate(rightVelocity)
+            motor4.rotate(rightVelocity)
+        c.close()
+
+except Exception as e:
+    print "Exception occurred!"
+    print(str(e))
+
+finally:
+    GPIO.cleanup()
+    sys.exit()
 
 
 def parse(message):
@@ -42,7 +51,3 @@ def parse(message):
     leftVelocity = int(message.substring(0, splitInedx))
     rightVelocity = int(message.substring(splitInedx, len(message)))
     return (leftVelocity, rightVelocity)
-
-finally:
-    GPIO.cleanup()
-    sys.exit()
