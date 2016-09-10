@@ -16,6 +16,7 @@ steve = Vehicle(motor1, motor2, motor3, motor4)
 
 s = socket.socket()
 host = socket.gethostname()
+print(host)
 port = 42069
 s.bind((host, port))
 
