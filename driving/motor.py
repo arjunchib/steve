@@ -18,9 +18,9 @@ class Motor:
         GPIO.setup(self.forward, GPIO.OUT)
         GPIO.setup(self.backward, GPIO.OUT)
         self.pwm = GPIO.PWM(self.enable, 1000)
+        self.pwm.start(0)
 
     def rotateForward(self, speed=100):
-        self.pwm.start(100)
         speed = Motor.limitSpeed(speed)
         self.pwm.ChangeDutyCycle(speed)
         GPIO.output(self.forward, 1)
@@ -36,7 +36,7 @@ class Motor:
         if velocity > 0:
             self.rotateForward(velocity)
         elif velocity < 0:
-            self.rotateBackward(velocity)
+            self.rotateBackward(-velocity)
         else:
             self.stop()
 
@@ -47,7 +47,7 @@ class Motor:
 
     @staticmethod
     def limitSpeed(speed):
-        if speed < 0:
+        if speed < 25:
             speed = 0
         elif speed > 100:
             speed = 100
